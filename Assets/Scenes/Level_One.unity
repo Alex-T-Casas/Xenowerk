@@ -15160,7 +15160,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.983724, y: 1}
+    m_SensorSize: {x: 1.9561069, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -15183,8 +15183,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 543042950}
-  m_LocalRotation: {x: 0.29542923, y: -0.6436007, z: 0.2967978, w: 0.6406331}
-  m_LocalPosition: {x: 3.21, y: 4.39, z: 4.66}
+  m_LocalRotation: {x: 0.28054702, y: -0.64998, z: 0.2815171, w: 0.6477403}
+  m_LocalPosition: {x: 4.4799995, y: 5.35, z: 4.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1699120441}
@@ -56330,7 +56330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 3.7475498, y: 4.39, z: 0.01731968}
+  m_FollowOffset: {x: 5.017549, y: 5.35, z: 0.01731968}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -59707,8 +59707,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823688464}
-  m_LocalRotation: {x: 0.29542923, y: -0.6436007, z: 0.2967978, w: 0.6406331}
-  m_LocalPosition: {x: 3.21, y: 4.39, z: 4.66}
+  m_LocalRotation: {x: 0.28054702, y: -0.64998, z: 0.2815171, w: 0.6477403}
+  m_LocalPosition: {x: 4.4799995, y: 5.35, z: 4.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -70446,6 +70446,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -348.151
       objectReference: {fileID: 0}
+    - target: {fileID: 6381601568509270977, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381601568509270977, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381601568509270977, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.387
+      objectReference: {fileID: 0}
     - target: {fileID: 6597311576737428815, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
       propertyPath: m_Name
       value: Weapon
@@ -70456,7 +70468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8383319254057837001, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.05
+      value: 0.025
       objectReference: {fileID: 0}
     - target: {fileID: 8907928950568103571, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
       propertyPath: playOnAwake
@@ -70464,11 +70476,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8907928950568103571, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.07
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 8907928950568103571, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 0
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 8907928950568103571, guid: 1688da2ae135e19468a5bffe66c9d51b, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar

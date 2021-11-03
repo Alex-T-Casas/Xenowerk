@@ -41,6 +41,14 @@ public class @ImputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""WeaponSwitch"",
+                    ""type"": ""Value"",
+                    ""id"": ""adff545a-8b0e-4242-9ef1-807259d05f89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -120,6 +128,17 @@ public class @ImputActions : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c632c60f-936c-40a8-a631-dee91ffbdb01"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeaponSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -131,6 +150,7 @@ public class @ImputActions : IInputActionCollection, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Fire = m_Gameplay.FindAction("Fire", throwIfNotFound: true);
         m_Gameplay_MousePosition = m_Gameplay.FindAction("MousePosition", throwIfNotFound: true);
+        m_Gameplay_WeaponSwitch = m_Gameplay.FindAction("WeaponSwitch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -183,6 +203,7 @@ public class @ImputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Fire;
     private readonly InputAction m_Gameplay_MousePosition;
+    private readonly InputAction m_Gameplay_WeaponSwitch;
     public struct GameplayActions
     {
         private @ImputActions m_Wrapper;
@@ -190,6 +211,7 @@ public class @ImputActions : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Fire => m_Wrapper.m_Gameplay_Fire;
         public InputAction @MousePosition => m_Wrapper.m_Gameplay_MousePosition;
+        public InputAction @WeaponSwitch => m_Wrapper.m_Gameplay_WeaponSwitch;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -208,6 +230,9 @@ public class @ImputActions : IInputActionCollection, IDisposable
                 @MousePosition.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
                 @MousePosition.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMousePosition;
+                @WeaponSwitch.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeaponSwitch;
+                @WeaponSwitch.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeaponSwitch;
+                @WeaponSwitch.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWeaponSwitch;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -221,6 +246,9 @@ public class @ImputActions : IInputActionCollection, IDisposable
                 @MousePosition.started += instance.OnMousePosition;
                 @MousePosition.performed += instance.OnMousePosition;
                 @MousePosition.canceled += instance.OnMousePosition;
+                @WeaponSwitch.started += instance.OnWeaponSwitch;
+                @WeaponSwitch.performed += instance.OnWeaponSwitch;
+                @WeaponSwitch.canceled += instance.OnWeaponSwitch;
             }
         }
     }
@@ -230,5 +258,6 @@ public class @ImputActions : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnWeaponSwitch(InputAction.CallbackContext context);
     }
 }
