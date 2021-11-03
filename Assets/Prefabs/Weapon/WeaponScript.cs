@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour
 {
     [SerializeField] ParticleSystem BulletEmitter;
-    [SerializeField] int BulletFired = 1;
+    [SerializeField] int BulletFired;
 
     public void SetActive (bool active)
     {
@@ -14,6 +14,6 @@ public class WeaponScript : MonoBehaviour
 
     public void Fire()
     {
-        BulletEmitter.Emit(BulletEmitter.emission.GetBurst(BulletFired).maxCount);
+        BulletEmitter.Emit(BulletEmitter.emission.GetBurst(0).maxCount);
     }
 }
