@@ -10,11 +10,11 @@ public class Player : MonoBehaviour
 
     private InputActions inputActions;
     private Animator animator;
-    [SerializeField] Weapon[] startWeaponPrefabs;
+    [SerializeField] WeaponScript[] startWeaponPrefabs;
     [SerializeField] Transform weaponSocket;
-    List<Weapon> Weapons;
-    int CurrentActiveWeapon = 0;
-    Weapon currentActiveWeapon;
+    List<WeaponScript> Weapons;
+    [SerializeField] int CurrentActiveWeaponIndex = 0;
+    WeaponScript currentActiveWeapon;
     int UpperBodyLayerIndex;
 
     private void Awake()
@@ -50,18 +50,34 @@ public class Player : MonoBehaviour
 
     void InitializeWeapons()
     {
-        foreach(Weapon weapon in startWeaponPrefabs)
+        foreach(WeaponScript weapon in startWeaponPrefabs)
         {
-            Weapon newWeapon = Instantiate(weapon);
+            WeaponScript newWeapon = Instantiate(weapon);
             newWeapon.transform.position = weaponSocket.position;
             newWeapon.transform.rotation = weaponSocket.rotation;
             newWeapon.transform.parent = weaponSocket;
-            //newWeapon.SetActive(false);
+            newWeapon.SetActive(false);
             Weapons.Add(newWeapon);
         }
+        
     }
 
-    //void EquipWeapon
+    void EquipWeapon(int weaponIndex)
+    {
+        if(weaponIndex > Weapons.Count || Weapons[weaponIndex] == currentActiveWeapon)
+        {
+            return;
+        }
+
+        if(currentActiveWeapon!=null)
+        {
+            currentActiveWeapon.SetActive(false);
+        }
+
+        CurrentActiveWeaponIndex = weaponIndex;
+        currentActiveWeapon = Weapons[CurrentActiveWeaponIndex];
+        currentActiveWeapon.SetActive(true);
+    }
     private void StopFire(InputAction.CallbackContext obj)
     {
         animator.SetLayerWeight(UpperBodyLayerIndex, 0);
