@@ -12,10 +12,15 @@ public class Player : MonoBehaviour
     private Animator animator;
     [SerializeField] WeaponScript[] startWeaponPrefabs;
     [SerializeField] Transform weaponSocket;
-    List<WeaponScript> Weapons;
-    [SerializeField] int CurrentActiveWeaponIndex = 0;
-    WeaponScript currentActiveWeapon;
+    [SerializeField] List<WeaponScript> Weapons;
+    int CurrentActiveWeaponIndex;
+    [SerializeField] WeaponScript currentActiveWeapon;
     int UpperBodyLayerIndex;
+    
+    #region Weapons
+    [SerializeField] GameObject Rifle;
+    [SerializeField] GameObject Shotgun;
+    #endregion
 
     private void Awake()
     {
@@ -45,12 +50,15 @@ public class Player : MonoBehaviour
         inputActions.Gameplay.MousePosition.performed += MousePositionOnperformed;
         inputActions.Gameplay.Fire.performed += Fire;
         inputActions.Gameplay.Fire.canceled += StopFire;
+        inputActions.Gameplay.WeaponSwitch.performed += SwitchToNextWeapon;
+
+        InitializeWeapons();
 
     }
 
     void InitializeWeapons()
     {
-        foreach(WeaponScript weapon in startWeaponPrefabs)
+        /*foreach(WeaponScript weapon in startWeaponPrefabs)
         {
             WeaponScript newWeapon = Instantiate(weapon);
             newWeapon.transform.position = weaponSocket.position;
@@ -58,16 +66,34 @@ public class Player : MonoBehaviour
             newWeapon.transform.parent = weaponSocket;
             newWeapon.SetActive(false);
             Weapons.Add(newWeapon);
-        }
-        
+        }*/
+
+        Rifle = Instantiate(startWeaponPrefabs[0].gameObject);
+        Shotgun = Instantiate(startWeaponPrefabs[1].gameObject);
+
+        Rifle.transform.position = weaponSocket.position;
+        Rifle.transform.parent = weaponSocket;
+        Rifle.SetActive(false);
+
+        Shotgun.transform.position = weaponSocket.position;
+        Shotgun.transform.parent = weaponSocket;
+        Shotgun.SetActive(false);
+
+
+        Weapons.Add(Rifle.GetComponent<WeaponScript>());
+        Weapons.Add(Shotgun.GetComponent<WeaponScript>());
+
+        animator.SetBool("useRifle", true);
+        animator.SetBool("useShotgun", false);
+        EquipWeapon(0);
     }
 
     void EquipWeapon(int weaponIndex)
     {
-        if(weaponIndex > Weapons.Count || Weapons[weaponIndex] == currentActiveWeapon)
+        /*if(weaponIndex > Weapons.Count || Weapons[weaponIndex] == currentActiveWeapon)
         {
             return;
-        }
+        }*/
 
         if(currentActiveWeapon!=null)
         {
@@ -75,9 +101,26 @@ public class Player : MonoBehaviour
         }
 
         CurrentActiveWeaponIndex = weaponIndex;
-        currentActiveWeapon = Weapons[CurrentActiveWeaponIndex];
+        currentActiveWeapon = Weapons[weaponIndex];
         currentActiveWeapon.SetActive(true);
     }
+
+    private void SwitchToNextWeapon(InputAction.CallbackContext obj)
+    {
+        if (CurrentActiveWeaponIndex == 0)
+        {
+            animator.SetBool("useRifle", false);
+            animator.SetBool("useShotgun", true);
+            EquipWeapon(1);
+        }
+        else if (CurrentActiveWeaponIndex == 1)
+        {
+            animator.SetBool("useRifle", true);
+            animator.SetBool("useShotgun", false);
+            EquipWeapon(0);
+        }
+    }
+
     private void StopFire(InputAction.CallbackContext obj)
     {
         animator.SetLayerWeight(UpperBodyLayerIndex, 0);
