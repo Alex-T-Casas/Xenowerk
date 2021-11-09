@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class ZombieBehaviourTree : BehaviourTree
 {
-    public override void Init(AIControler aIControler)
+    public override void Init(AIControler aiController)
     {
-        base.Init(aIControler);
-        BTTask_Wait wait = new BTTask_Wait(aIControler, 4);
-        SetRoot(wait);
+        base.Init(aiController);
+        Sequence PatrollingSequence = new Sequence(aiController);
+            PatrollingSequence.AddChild(new BTTask_Wait(aiController, 4));
+            PatrollingSequence.AddChild(new BTTask_Wait(aiController, 3));
+
+
+        SetRoot(PatrollingSequence);
     }
 }
