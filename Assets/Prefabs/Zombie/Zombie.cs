@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Zombie : MonoBehaviour
 {
+    HealthComp HealthComp;
+
     // Start is called before the first frame update
     void Start()
     {

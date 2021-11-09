@@ -4,7 +4,7 @@ using UnityEngine;
 
 public delegate void OnDamageTaken(int newAmt, int OldValue);
 public delegate void OnHitpointDepeleted();
-public class HelathComp : MonoBehaviour
+public class HealthComp : MonoBehaviour
 {
     [SerializeField] int hitPoint;
 
