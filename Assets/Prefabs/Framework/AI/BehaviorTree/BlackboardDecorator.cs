@@ -31,7 +31,7 @@ public class BlackboardDecorator : Decorator
     public override EBTTaskResult Execute()
     {
         object value = AIC.GetBlackBoardValue(_keyName);
-        if(ShouldDoTask(value))
+        if (ShouldDoTask(value))
         {
             return EBTTaskResult.Running;
         }
@@ -45,8 +45,19 @@ public class BlackboardDecorator : Decorator
 
     private void KeyUpdated(string key, object value)
     {
-        Debug.Log($"{key} has changed to: {value}");
+
+        if (AIC.GetBehaviourTree().IsRunning(this))
+        {
+            if (ShouldDoTask(value))
+            {
+                if (_observerAborts == EObserverAborts.Self || _observerAborts == EObserverAborts.Both)
+                {
+                    AbortTask();
+                }
+            }
+        }
     }
+    else if(AIC.Get)
 
     public override EBTTaskResult UpdateTask()
     {
@@ -54,12 +65,12 @@ public class BlackboardDecorator : Decorator
         {
             return GetChild().Start();
         }
-        return GetChild().UpdateTask();
+        return GetChild().Update();
     }
 
     public override void FinishTask()
     {
-        throw new System.NotImplementedException();
+
     }
 
     bool ShouldDoTask(object value)

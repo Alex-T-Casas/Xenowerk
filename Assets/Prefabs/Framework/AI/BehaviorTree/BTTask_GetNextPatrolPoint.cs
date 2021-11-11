@@ -22,7 +22,7 @@ public class BTTask_GetNextPatrolPoint : BTNode
         return EBTTaskResult.Failure;
     }
 
-    public override EBTTaskResult UpdateTask()
+    public override EBTTaskResult Update()
     {
         return EBTTaskResult.Failure;
     }

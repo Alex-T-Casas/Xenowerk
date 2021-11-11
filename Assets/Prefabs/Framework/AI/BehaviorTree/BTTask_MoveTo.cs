@@ -36,7 +36,7 @@ public class BTTask_MoveTo : BTNode
         return EBTTaskResult.Failure;
     }
 
-    public override EBTTaskResult UpdateTask()
+    public override EBTTaskResult Update()
     {
         if (GetDestination(out Vector3 destination))
         {

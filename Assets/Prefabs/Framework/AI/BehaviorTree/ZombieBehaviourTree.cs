@@ -13,13 +13,13 @@ public class ZombieBehaviourTree : BehaviourTree
             BTTask_MoveTo MoveToTarget = new BTTask_MoveTo(aiController, "Target", 1.5f);
             BlackboardDecorator MoveToTargetDeco = new BlackboardDecorator(aiController, MoveToTarget, "Target", EKeyQuery.Set, EObserverAborts.Both);
         
-        RootSelector.AddChild(MoveToTarget);
+        RootSelector.AddChild(MoveToTargetDeco);
             Sequence PatrollingSequence = new Sequence(aiController);
                 PatrollingSequence.AddChild(new BTTask_GetNextPatrolPoint(aiController));
                 PatrollingSequence.AddChild(new BTTask_MoveTo(aiController, "patrolPoint", 1f));
                 PatrollingSequence.AddChild(new BTTask_Wait(aiController, 3));
 
-
-        SetRoot(PatrollingSequence);
+        RootSelector.AddChild(PatrollingSequence);
+        SetRoot(RootSelector);
     }
 }

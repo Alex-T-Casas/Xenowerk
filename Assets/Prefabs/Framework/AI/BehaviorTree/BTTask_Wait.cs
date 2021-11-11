@@ -24,7 +24,7 @@ public class BTTask_Wait : BTNode
         return EBTTaskResult.Running;
     }
 
-    public override EBTTaskResult UpdateTask()
+    public override EBTTaskResult Update()
     {
         _counter += Time.deltaTime;
         if(_counter >= _waitTime)

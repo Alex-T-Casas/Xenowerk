@@ -18,7 +18,7 @@ public class BTTask_CauseFailure : BTNode
         
     }
 
-    public override EBTTaskResult UpdateTask()
+    public override EBTTaskResult Update()
     {
         return EBTTaskResult.Failure;
     }

@@ -13,7 +13,8 @@ public abstract class Decorator : BTNode
 
     public Decorator(AIControler aIControler, BTNode child) : base(aIControler)
     {
-
+        _child = child;
+        _child.parent = this;
     }
 
     public override void Finish()

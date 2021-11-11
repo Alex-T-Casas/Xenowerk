@@ -9,6 +9,7 @@ public abstract class Composite : BTNode
         if(!_Children.Contains(newChild))
         {
             _Children.Add(newChild);
+            newChild.parent = this;
         }
     }
 
@@ -52,7 +53,7 @@ public abstract class Composite : BTNode
             return DetermineResult(result);
         }
 
-        result = _CurrentRunningChild.UpdateTask();
+        result = _CurrentRunningChild.Update();
         return DetermineResult(result);
     }
 
@@ -60,6 +61,11 @@ public abstract class Composite : BTNode
 
     public override void FinishTask()
     {
+        if (_Children.Count > 0)
+        {
+            _CurrentRunningChild = _Children[0];
+            _CurrentRunningChildIndex = 0;
+        }
         foreach (var node in _Children)
         {
             node.Finish();
