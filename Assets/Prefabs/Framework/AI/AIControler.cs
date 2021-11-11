@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void OnBlackboardKeyUpdated(string key, object value);
 public class AIControler : MonoBehaviour
 {
     [SerializeField] BehaviourTree _BehaviourTree;
+    [SerializeField] PerceptionComponent _perceptionComp;
+    public OnBlackboardKeyUpdated onBlackboardKeyUpdated;
+    private Dictionary<string, object> _Blackboard = new Dictionary<string, object>();
 
-    private Dictionary<string, object> _Blackboard; 
     public void AddBackboardkey(string key, object defaultValue = null)
     {
         if(!_Blackboard.ContainsKey(key))
@@ -20,6 +23,10 @@ public class AIControler : MonoBehaviour
         if(_Blackboard.ContainsKey(key))
         {
             _Blackboard[key] = value;
+            if(onBlackboardKeyUpdated != null)
+            {
+                onBlackboardKeyUpdated.Invoke(key, value);
+            }
         }
     }
 
@@ -32,15 +39,35 @@ public class AIControler : MonoBehaviour
     {
         return _BehaviourTree;
     }
-    // Start is called before the first frame update
+
+
     void Start()
     {
         if (_BehaviourTree != null)
         {
-            _BehaviourTree.Init(aIControler: this);
+            _BehaviourTree.Init(this);
+        }
+
+        if(_perceptionComp != null)
+        {
+            _perceptionComp.onPerceptionUpdated += PerceptionUpdated;
         }
         
     }
+
+    private void PerceptionUpdated(bool successfulySensed, PerceptionStimuli stimuli)
+    {
+        if (successfulySensed)
+        {
+            SetBlackboardKey("Target", stimuli.gameObject);
+        }
+        else
+        {
+            SetBlackboardKey("Target", null);
+        }
+    }
+
+
 
     // Update is called once per frame
     void Update()

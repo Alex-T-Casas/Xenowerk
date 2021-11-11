@@ -40,9 +40,9 @@ public abstract class BTNode
         return EBTTaskResult.Running;
     }
 
-    public void Finish()
+    public virtual void Finish()
     {
-        if (!_Finished)
+        if (!_Finished && HasStarted())
         {
             _Finished = true;
             _Started = false;

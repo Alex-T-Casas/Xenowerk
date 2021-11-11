@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _BehaviourTree: {fileID: -538702816414847036}
+  _perceptionComp: {fileID: 3730147381584595493}
 --- !u!114 &-538702816414847036
 MonoBehaviour:
   m_ObjectHideFlags: 0

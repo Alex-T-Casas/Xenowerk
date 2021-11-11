@@ -10,7 +10,6 @@ public class BTTask_MoveTo : BTNode
 {
     private string _keyName;
     private NavMeshAgent _agent;
-    private GameObject _destination;
     private float _aceceptableRadius;
 
 
@@ -26,10 +25,10 @@ public class BTTask_MoveTo : BTNode
         
         if(_agent)
         {
-            _destination = (GameObject)AIC.GetBlackBoardValue(_keyName);
-            if (_destination != null)
+            
+            if (GetDestination(out Vector3 destination))
             {
-                _agent.SetDestination(_destination.transform.position);
+                _agent.SetDestination(destination);
                 _agent.isStopped = false;
                 return EBTTaskResult.Running;
             }
@@ -39,9 +38,18 @@ public class BTTask_MoveTo : BTNode
 
     public override EBTTaskResult UpdateTask()
     {
-        if (Vector3.Distance(AIC.transform.position, _destination.transform.position) <= _aceceptableRadius)
+        if (GetDestination(out Vector3 destination))
         {
-            return EBTTaskResult.Success;
+            _agent.SetDestination(destination);
+
+            if (Vector3.Distance(AIC.transform.position, destination) <= _aceceptableRadius)
+            {
+                return EBTTaskResult.Success;
+            }
+        }
+        else
+        {
+            return EBTTaskResult.Failure;
         }
         return EBTTaskResult.Running;
     }
@@ -49,6 +57,30 @@ public class BTTask_MoveTo : BTNode
     public override void FinishTask()
     {
         _agent.isStopped = true;
+    }
+
+    bool GetDestination(out Vector3 Destination)
+    {
+        Destination = Vector3.negativeInfinity;
+        object value = AIC.GetBlackBoardValue(_keyName);
+
+        if(value == null)
+        {
+            return false;
+        }
+
+        if (value.GetType() == typeof(GameObject))
+        {
+            Destination = ((GameObject)value).transform.position;
+            return true;
+        }
+
+        if(value.GetType() == typeof(Vector3))
+        {
+            Destination = (Vector3)value;
+            return true;
+        }
+        return false;
     }
 }
 

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void OnPerceptionUpdated(bool successfulySensed, PerceptionStimuli stimuli);
+
 public abstract class PerceptionComponent : MonoBehaviour
 {
-
+    public OnPerceptionUpdated onPerceptionUpdated;
     private void Start()
     {
         FindObjectOfType<PerceptionSystem>().AddListener(this);

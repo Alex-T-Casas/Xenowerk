@@ -22,7 +22,7 @@ public class BehaviourTree : MonoBehaviour
     public void Run()
     {
         EBTTaskResult result = EBTTaskResult.Failure;
-        if(!_Root.HasStarted())
+        if(! _Root.HasStarted())
         {
             result = _Root.Start();
 

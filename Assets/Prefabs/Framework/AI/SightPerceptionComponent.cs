@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void OnPerceptionUpdated(bool successfullySensed, PerceptionStimuli stimuli);
 
 public class SightPerceptionComponent : PerceptionComponent
 {
-    public OnPerceptionUpdated onPerceptionUpdated;
     private List<PerceptionStimuli> CurrentlySeeingStimulis = new List<PerceptionStimuli>();
 
     [SerializeField] private float SightRadius = 5f;
