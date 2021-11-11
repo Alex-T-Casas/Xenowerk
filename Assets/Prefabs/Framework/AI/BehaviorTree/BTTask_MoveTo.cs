@@ -23,17 +23,32 @@ public class BTTask_MoveTo : BTNode
 
     public override EBTTaskResult Execute()
     {
-        throw new NotImplementedException();
-    }
-
-    public override void FinishTask()
-    {
-        throw new NotImplementedException();
+        
+        if(_agent)
+        {
+            _destination = (GameObject)AIC.GetBlackBoardValue(_keyName);
+            if (_destination != null)
+            {
+                _agent.SetDestination(_destination.transform.position);
+                _agent.isStopped = false;
+                return EBTTaskResult.Running;
+            }
+        }
+        return EBTTaskResult.Failure;
     }
 
     public override EBTTaskResult UpdateTask()
     {
-        throw new NotImplementedException();
+        if (Vector3.Distance(AIC.transform.position, _destination.transform.position) <= _aceceptableRadius)
+        {
+            return EBTTaskResult.Success;
+        }
+        return EBTTaskResult.Running;
+    }
+    
+    public override void FinishTask()
+    {
+        _agent.isStopped = true;
     }
 }
 

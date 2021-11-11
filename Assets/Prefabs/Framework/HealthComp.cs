@@ -8,8 +8,8 @@ public class HealthComp : MonoBehaviour
 {
     [SerializeField] int hitPoint;
 
-    OnDamageTaken onDamageTaken;
-    OnHitpointDepeleted onHitpointDepeleted;
+    public OnDamageTaken onDamageTaken;
+    public OnHitpointDepeleted onHitpointDepeleted;
 
     private void OnParticleCollision(GameObject other)
     {
@@ -31,8 +31,7 @@ public class HealthComp : MonoBehaviour
             if(onHitpointDepeleted!=null)
             {
                 onHitpointDepeleted.Invoke();
-            }
-            //die
+            } 
         }
         else
         {

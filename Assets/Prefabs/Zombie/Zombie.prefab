@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: -3735047705692708487}
   - component: {fileID: -2243224482877765490}
   - component: {fileID: -538702816414847036}
+  - component: {fileID: 3245496882041616973}
+  - component: {fileID: 3730147381584595493}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -145,3 +147,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e89482ec101a984ba98375942f02d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3245496882041616973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567008818519754561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb68f529410b7a459efc64748c1e44f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoint: 10
+--- !u!114 &3730147381584595493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567008818519754561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc13eeab53f85146b7f8d9d307ea317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SightRadius: 5
+  LoseSightRadius: 6
+  PeripheralAngleDeggres: 80
+  eyeHeight: 1.6

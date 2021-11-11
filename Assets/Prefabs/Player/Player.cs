@@ -166,6 +166,5 @@ public class Player : MonoBehaviour
     public void FireTimePoint()
     {
         GetComponentInChildren<WeaponScript>().Fire();
-        Debug.Log("fire");
     }
 }

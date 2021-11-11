@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2789740007851399756, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fcd386452023dfc4db2d6594ec986133, type: 2}
+    - target: {fileID: -2789740007851399756, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
+      propertyPath: m_CullingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2789740007851399756, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2278893722576942120, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -115,6 +127,10 @@ PrefabInstance:
     - target: {fileID: 2278893722576942120, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3245496882041616973, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
+      propertyPath: hitPoint
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7567008818519754561, guid: 76d50f4e022d9c24498f61a18356fb7f, type: 3}
       propertyPath: m_Name
