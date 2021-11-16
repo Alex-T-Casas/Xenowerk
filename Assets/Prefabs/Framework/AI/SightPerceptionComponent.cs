@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 
 public class SightPerceptionComponent : PerceptionComponent
 {
@@ -9,6 +9,7 @@ public class SightPerceptionComponent : PerceptionComponent
     [SerializeField] private float SightRadius = 5f;
     [SerializeField] private float LoseSightRadius = 6f;
     [SerializeField] private float PeripheralAngleDeggres = 80f;
+    [SerializeField] public Vector3 temphold;
 
     [SerializeField] private float eyeHeight = 1.6f;
 
@@ -36,6 +37,7 @@ public class SightPerceptionComponent : PerceptionComponent
             if (onPerceptionUpdated != null)
             {
                 Debug.Log($"I lost sight of: {stimuli.gameObject}");
+                temphold = this.GetComponent<NavMeshAgent>().destination;
                 onPerceptionUpdated.Invoke(false, stimuli);
             }
         }

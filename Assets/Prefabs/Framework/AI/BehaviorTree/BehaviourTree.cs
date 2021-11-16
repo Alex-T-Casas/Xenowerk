@@ -61,22 +61,34 @@ public class BehaviourTree : MonoBehaviour
         List<BTNode> Hierachy = new List<BTNode>();
         BTNode NextInHierarchy = Node;
         Hierachy.Add(NextInHierarchy);
-        while(NextInHierarchy.parent != null)
+        while(NextInHierarchy.Parent != null)
         {
-            Hierachy.Add(NextInHierarchy.parent);
-            NextInHierarchy = NextInHierarchy.parent;
+            Hierachy.Add(NextInHierarchy.Parent);
+            NextInHierarchy = NextInHierarchy.Parent;
         }
         Hierachy.Reverse();
         return Hierachy;
     }
 
-    public bool IsCurrentLowerThan(BlackboardDecorator blackboardDecorator)
+    public bool IsCurrentLowerThan(BTNode Node)
     {
         List<BTNode> CurrentRunningHierachy = GetHierachy(CurrentRunningNode);
         List<BTNode> NodeHierachy = GetHierachy(Node);
         for (int i = 0; i < CurrentRunningHierachy.Count && i < NodeHierachy.Count; i++)
         {
-            BTNode CurrentRunningHierarchy
+            BTNode CurrentParent = CurrentRunningHierachy[i];
+            BTNode NodeParent = NodeHierachy[i];
+            if(CurrentParent == _Root || NodeParent == _Root)
+            {
+                return false;
+            }
+
+            if(CurrentParent != NodeParent)
+            {
+                return CurrentParent.GetNodeIndexInParent() > NodeParent.GetNodeIndexInParent();
+            }
         }
+
+        return false;
     }
 }

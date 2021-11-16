@@ -82,5 +82,10 @@ public class BTTask_MoveTo : BTNode
         }
         return false;
     }
+
+    public override EBTTaskResult UpdateTask()
+    {
+        throw new NotImplementedException();
+    }
 }
 

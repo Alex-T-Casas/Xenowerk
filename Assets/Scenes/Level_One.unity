@@ -15343,7 +15343,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.128081, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -61160,14 +61160,6 @@ PrefabInstance:
     - target: {fileID: 582959863410682032, guid: 201312933a8b9cb4781f3495dad1e014, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4618978018133599789, guid: 201312933a8b9cb4781f3495dad1e014, type: 3}
-      propertyPath: m_Acceleration
-      value: 1000000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4618978018133599789, guid: 201312933a8b9cb4781f3495dad1e014, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 10000000
       objectReference: {fileID: 0}
     - target: {fileID: 4708751646575111847, guid: 201312933a8b9cb4781f3495dad1e014, type: 3}
       propertyPath: m_IsKinematic

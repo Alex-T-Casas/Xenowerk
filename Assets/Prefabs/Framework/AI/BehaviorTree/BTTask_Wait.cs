@@ -38,5 +38,10 @@ public class BTTask_Wait : BTNode
     {
         Debug.Log("Wait finished");
     }
+
+    public override EBTTaskResult UpdateTask()
+    {
+        throw new NotImplementedException();
+    }
 }
 

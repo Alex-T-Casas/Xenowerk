@@ -22,4 +22,9 @@ public class BTTask_CauseFailure : BTNode
     {
         return EBTTaskResult.Failure;
     }
+
+    public override EBTTaskResult UpdateTask()
+    {
+        throw new System.NotImplementedException();
+    }
 }

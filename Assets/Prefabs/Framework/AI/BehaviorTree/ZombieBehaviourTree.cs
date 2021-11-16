@@ -9,15 +9,20 @@ public class ZombieBehaviourTree : BehaviourTree
         base.Init(aiController);
             aiController.AddBackboardkey("patrolPoint");
             aiController.AddBackboardkey("Target");
-            Selector RootSelector = new Selector(aiController);
+            aiController.AddBackboardkey("LastSeenLocation");
+        Selector RootSelector = new Selector(aiController);
             BTTask_MoveTo MoveToTarget = new BTTask_MoveTo(aiController, "Target", 1.5f);
             BlackboardDecorator MoveToTargetDeco = new BlackboardDecorator(aiController, MoveToTarget, "Target", EKeyQuery.Set, EObserverAborts.Both);
-        
+
+            BTTask_MoveTo MoveToLastTarget = new BTTask_MoveTo(aiController, "LastSeenLocation", 1.5f);
+            BlackboardDecorator MoveToLastTargetDeco = new BlackboardDecorator(aiController, MoveToTarget, "LastSeenLocation", EKeyQuery.Set, EObserverAborts.Both);
+
         RootSelector.AddChild(MoveToTargetDeco);
-            Sequence PatrollingSequence = new Sequence(aiController);
-                PatrollingSequence.AddChild(new BTTask_GetNextPatrolPoint(aiController));
+        RootSelector.AddChild(MoveToLastTargetDeco);
+        Sequence PatrollingSequence = new Sequence(aiController);
+           PatrollingSequence.AddChild(new BTTask_Wait(aiController, 3));
+            PatrollingSequence.AddChild(new BTTask_GetNextPatrolPoint(aiController));
                 PatrollingSequence.AddChild(new BTTask_MoveTo(aiController, "patrolPoint", 1f));
-                PatrollingSequence.AddChild(new BTTask_Wait(aiController, 3));
 
         RootSelector.AddChild(PatrollingSequence);
         SetRoot(RootSelector);

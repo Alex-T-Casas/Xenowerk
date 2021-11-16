@@ -31,5 +31,10 @@ public class BTTask_GetNextPatrolPoint : BTNode
     {
         
     }
+
+    public override EBTTaskResult UpdateTask()
+    {
+        throw new NotImplementedException();
+    }
 }
 

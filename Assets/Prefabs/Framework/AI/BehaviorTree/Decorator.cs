@@ -14,7 +14,7 @@ public abstract class Decorator : BTNode
     public Decorator(AIControler aIControler, BTNode child) : base(aIControler)
     {
         _child = child;
-        _child.parent = this;
+        _child.Parent = this;
     }
 
     public override void Finish()

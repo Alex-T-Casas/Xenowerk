@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public delegate void OnBlackboardKeyUpdated(string key, object value);
 public class AIControler : MonoBehaviour
@@ -64,6 +65,7 @@ public class AIControler : MonoBehaviour
         else
         {
             SetBlackboardKey("Target", null);
+            SetBlackboardKey("LastSeenLocation", gameObject.GetComponent<NavMeshAgent>().destination);
         }
     }
 

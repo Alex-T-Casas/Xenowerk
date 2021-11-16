@@ -56,8 +56,18 @@ public class BlackboardDecorator : Decorator
                 }
             }
         }
+        //we are running a lower hiaracky
+        else if (AIC.GetBehaviourTree().IsCurrentLowerThan(this))
+        {
+            if (ShouldDoTask(value))
+            {
+                if (_observerAborts == EObserverAborts.Both || _observerAborts == EObserverAborts.LowerPriorty)
+                {
+                    AIC.GetBehaviourTree().ReStart();
+                }
+            }
+        }
     }
-    else if(AIC.Get)
 
     public override EBTTaskResult UpdateTask()
     {

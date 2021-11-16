@@ -9,7 +9,7 @@ public abstract class Composite : BTNode
         if(!_Children.Contains(newChild))
         {
             _Children.Add(newChild);
-            newChild.parent = this;
+            newChild.Parent = this;
         }
     }
 
@@ -72,7 +72,11 @@ public abstract class Composite : BTNode
         }
     }
 
+    public int GetChildIndex(BTNode bTNode)
+    {
 
+        return _Children.FindIndex(0, target => { return bTNode == target; });
+    }
 
 
 }

@@ -13,23 +13,22 @@ public enum EBTTaskResult
 
 public abstract class BTNode
 {
-
+    public BTNode Parent { get; set; }
     private bool ShouldAbortTask;
+
     public int GetNodeIndexInParent()
     {
-        if(parent.GetType() == typeof(Selector) || parent.GetType() == typeof(Sequence))
+        if(Parent.GetType() == typeof(Selector) || Parent.GetType() == typeof(Sequence))
         {
-           return ((Composite).parent)GetChildIndex(this);
+            return ((Composite)Parent).GetChildIndex(this);
         }
+
+        return 0;
     }
 
-    private void GetChildIndex(BTNode bTNode)
-    {
 
-        return _Children.FindIndex(0, target => { return bTNode == target; });
-    }
 
-    public BTNode parent { get; set; }
+
     public  AIControler AIC 
     {
         get { return _AIC; } 
@@ -47,7 +46,12 @@ public abstract class BTNode
     private bool _Started;
     private bool _Finished;
 
-    public EBTTaskResult Update()
+    public void AbortTask()
+    {
+        ShouldAbortTask = true;
+    }
+
+    public virtual EBTTaskResult Update()
     {
         if(!ShouldAbortTask)
         {
@@ -61,6 +65,7 @@ public abstract class BTNode
     {
         if(!_Started)
         {
+            ShouldAbortTask = false;
             _Started = true;
             _Finished = false;
             AIC.GetBehaviourTree().CurrentRunningNode = this;
