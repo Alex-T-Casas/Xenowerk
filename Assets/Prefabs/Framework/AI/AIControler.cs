@@ -65,7 +65,7 @@ public class AIControler : MonoBehaviour
         else
         {
             SetBlackboardKey("Target", null);
-            SetBlackboardKey("LastSeenLocation", gameObject.GetComponent<NavMeshAgent>().destination);
+            SetBlackboardKey("LastSeenLocation", stimuli.transform.position);
         }
     }
 

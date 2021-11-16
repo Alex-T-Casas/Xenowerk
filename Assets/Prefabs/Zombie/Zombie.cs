@@ -36,8 +36,9 @@ public class Zombie : MonoBehaviour
     
     }
 
-    private void TookDamage(int newAmt, int OldValue)
+    private void TookDamage(int newAmt, int OldValue, GameObject Instigator)
     {
+        GetComponent<AIControler>().SetBlackboardKey("Target", Instigator.transform.position);
         Debug.Log($"I took {OldValue - newAmt} of damage!");
     }
 

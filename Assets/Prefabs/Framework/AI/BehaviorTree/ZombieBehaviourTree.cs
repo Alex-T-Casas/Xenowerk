@@ -10,15 +10,18 @@ public class ZombieBehaviourTree : BehaviourTree
             aiController.AddBackboardkey("patrolPoint");
             aiController.AddBackboardkey("Target");
             aiController.AddBackboardkey("LastSeenLocation");
+
         Selector RootSelector = new Selector(aiController);
             BTTask_MoveTo MoveToTarget = new BTTask_MoveTo(aiController, "Target", 1.5f);
             BlackboardDecorator MoveToTargetDeco = new BlackboardDecorator(aiController, MoveToTarget, "Target", EKeyQuery.Set, EObserverAborts.Both);
-
-            BTTask_MoveTo MoveToLastTarget = new BTTask_MoveTo(aiController, "LastSeenLocation", 1.5f);
-            BlackboardDecorator MoveToLastTargetDeco = new BlackboardDecorator(aiController, MoveToTarget, "LastSeenLocation", EKeyQuery.Set, EObserverAborts.Both);
-
         RootSelector.AddChild(MoveToTargetDeco);
-        RootSelector.AddChild(MoveToLastTargetDeco);
+
+        Sequence MoveToLastSeenSeq = new Sequence(aiController);
+            BTTask_MoveTo MoveToLastTargetLoc = new BTTask_MoveTo(aiController, "LastSeenLocation", 0.5f);
+            BlackboardDecorator MoveToLastTargetDeco = new BlackboardDecorator(aiController, MoveToLastTargetLoc, "LastSeenLocation", EKeyQuery.Set, EObserverAborts.Both);
+        MoveToLastSeenSeq.AddChild(MoveToLastTargetDeco);
+            BTTask_ClearBlackBoardKeyVlaue ClearLastSeenLoc = new BTTask_ClearBlackBoardKeyVlaue(aiController, "LastSeenLocation");
+
         Sequence PatrollingSequence = new Sequence(aiController);
            PatrollingSequence.AddChild(new BTTask_Wait(aiController, 3));
             PatrollingSequence.AddChild(new BTTask_GetNextPatrolPoint(aiController));

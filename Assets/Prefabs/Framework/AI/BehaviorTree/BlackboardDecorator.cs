@@ -45,7 +45,10 @@ public class BlackboardDecorator : Decorator
 
     private void KeyUpdated(string key, object value)
     {
-
+        if(key != _keyName)
+        {
+            return;
+        }
         if (AIC.GetBehaviourTree().IsRunning(this))
         {
             if (ShouldDoTask(value))

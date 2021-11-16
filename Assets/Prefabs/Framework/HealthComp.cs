@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void OnDamageTaken(int newAmt, int OldValue);
+public delegate void OnDamageTaken(int newAmt, int OldValue, GameObject Instigator);
 public delegate void OnHitpointDepeleted();
 public class HealthComp : MonoBehaviour
 {
@@ -11,17 +11,18 @@ public class HealthComp : MonoBehaviour
     public OnDamageTaken onDamageTaken;
     public OnHitpointDepeleted onHitpointDepeleted;
 
+
     private void OnParticleCollision(GameObject other)
     {
         WeaponScript weapon = other.GetComponentInParent<WeaponScript>();
 
         if(weapon!=null)
         {
-            TakeDamage(weapon.GetBulletDamage());
+            TakeDamage(weapon.GetBulletDamage(), other);
         }
     }
 
-    void TakeDamage(int anmt)
+    void TakeDamage(int anmt, GameObject Instigator)
     {
         int OldValue = hitPoint;
         hitPoint -= anmt;
@@ -40,7 +41,7 @@ public class HealthComp : MonoBehaviour
             {
                 if(onDamageTaken!=null)
                 {
-                   onDamageTaken.Invoke(hitPoint, OldValue);
+                   onDamageTaken.Invoke(hitPoint, OldValue, Instigator);
                 }
 
             }

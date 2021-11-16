@@ -80,7 +80,7 @@ public class BehaviourTree : MonoBehaviour
             BTNode NodeParent = NodeHierachy[i];
             if(CurrentParent == _Root || NodeParent == _Root)
             {
-                return false;
+                continue;
             }
 
             if(CurrentParent != NodeParent)

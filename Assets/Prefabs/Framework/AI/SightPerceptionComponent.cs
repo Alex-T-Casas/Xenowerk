@@ -21,17 +21,17 @@ public class SightPerceptionComponent : PerceptionComponent
 
         bool Percepted = InSightRange && IsNotBlocked && IsInPeripheralAngleDeggres;
 
-        if(Percepted && !CurrentlySeeingStimulis.Contains(stimuli))
+        if (Percepted && !CurrentlySeeingStimulis.Contains(stimuli))
         {
             CurrentlySeeingStimulis.Add(stimuli);
-            if(onPerceptionUpdated!=null)
+            if (onPerceptionUpdated != null)
             {
                 Debug.Log($"I have seen: {stimuli.gameObject}");
                 onPerceptionUpdated.Invoke(true, stimuli);
             }
         }
 
-        if(!Percepted && CurrentlySeeingStimulis.Contains(stimuli))
+        if (!Percepted && CurrentlySeeingStimulis.Contains(stimuli))
         {
             CurrentlySeeingStimulis.Remove(stimuli);
             if (onPerceptionUpdated != null)
@@ -49,7 +49,7 @@ public class SightPerceptionComponent : PerceptionComponent
         Vector3 ownerPos = transform.position;
         Vector3 stimuliPos = stimuli.transform.position;
         float checkRadius = SightRadius;
-        if(CurrentlySeeingStimulis.Contains(stimuli))
+        if (CurrentlySeeingStimulis.Contains(stimuli))
         {
             checkRadius = LoseSightRadius;
         }
@@ -91,7 +91,7 @@ public class SightPerceptionComponent : PerceptionComponent
         Quaternion RotateRight = Quaternion.AngleAxis(-PeripheralAngleDeggres / 2, Vector3.up);
         Gizmos.DrawLine(transform.position, transform.position + RotateLeft * forward * LoseSightRadius);
         Gizmos.DrawLine(transform.position, transform.position + RotateRight * forward * LoseSightRadius);
-        
+
         foreach (var Stimuli in CurrentlySeeingStimulis)
         {
             Gizmos.DrawLine(transform.position, Stimuli.transform.position);
