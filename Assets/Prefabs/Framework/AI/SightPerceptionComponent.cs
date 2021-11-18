@@ -13,11 +13,17 @@ public class SightPerceptionComponent : PerceptionComponent
 
     [SerializeField] private float eyeHeight = 1.6f;
 
+    [SerializeField] private float AttackRange = 1f;
+
+    Zombie zombie;
+
     public override bool EvaluatePerception(PerceptionStimuli stimuli)
     {
         bool InSightRange = this.InSightRange(stimuli);
         bool IsNotBlocked = this.IsNotBlocked(stimuli);
         bool IsInPeripheralAngleDeggres = this.IsInPeripheralAngleDeggres(stimuli);
+        
+        bool IsInAttackRange = this.InAttackRange(stimuli);
 
         bool Percepted = InSightRange && IsNotBlocked && IsInPeripheralAngleDeggres;
 
@@ -27,6 +33,17 @@ public class SightPerceptionComponent : PerceptionComponent
             if (onPerceptionUpdated != null)
             {
                 Debug.Log($"I have seen: {stimuli.gameObject}");
+                
+
+                if(IsInAttackRange)
+                {
+                    zombie.Attack();
+                }
+                else
+                {
+                    zombie.StopAttack();
+                }
+                
                 onPerceptionUpdated.Invoke(true, stimuli);
             }
         }
@@ -80,6 +97,14 @@ public class SightPerceptionComponent : PerceptionComponent
     {
         float AngleToStimuli = Mathf.Rad2Deg * Mathf.Acos(Vector3.Dot(transform.forward, (Stimuli.transform.position - transform.position).normalized));
         return AngleToStimuli < PeripheralAngleDeggres / 2;
+    }
+
+    bool InAttackRange(PerceptionStimuli stimuli)
+    {
+        Vector3 ownerPos = transform.position;
+        Vector3 stimuliPos = stimuli.transform.position;
+        float checkRadius = AttackRange;
+        return Vector3.Distance(ownerPos, stimuliPos) <= checkRadius;
     }
 
     private void OnDrawGizmos()

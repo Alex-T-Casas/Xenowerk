@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class Player : MonoBehaviour
     int CurrentActiveWeaponIndex;
     [SerializeField] WeaponScript currentActiveWeapon;
     int UpperBodyLayerIndex;
+
+    float PlayerHealthCurrent = 100f;
+    float PlayerHealthMax = 100f;
+    [SerializeField] float HealthBarVal;
+    [SerializeField] Material HealthBar;
     
     #region Weapons
     [SerializeField] GameObject Rifle;
@@ -25,6 +31,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         inputActions = new InputActions();
+        HealthBarVal = HealthBar.GetFloat("_Progress");
     }
 
     private void OnEnable()
@@ -150,6 +157,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         UpdateAnimationParamaters();
+        UpdateHealthBar();
     }
 
     void UpdateAnimationParamaters()
@@ -166,5 +174,17 @@ public class Player : MonoBehaviour
     public void FireTimePoint()
     {
         GetComponentInChildren<WeaponScript>().Fire();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        PlayerHealthCurrent = PlayerHealthCurrent - damage;
+
+        HealthBarVal = PlayerHealthCurrent % PlayerHealthMax;
+    }
+
+    public void UpdateHealthBar()
+    {
+        HealthBar.SetFloat("_Progress", HealthBarVal);
     }
 }

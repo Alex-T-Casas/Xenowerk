@@ -7,16 +7,20 @@ public class Zombie : MonoBehaviour
 {
     HealthComp HealthComponent;
     SightPerceptionComponent SightPerceptionComp;
+    Player player;
 
     private Animator animationControler;
+    int UpperBodyLayerIndex;
+    [SerializeField] float DmamagePerHit = 10f;
     // Start is called before the first frame update
     void Start()
     {
         SightPerceptionComp = GetComponent<SightPerceptionComponent>();
         HealthComponent = GetComponent<HealthComp>();
         animationControler = GetComponent<Animator>();
+        UpperBodyLayerIndex = animationControler.GetLayerIndex("UpperBody");
 
-        if(HealthComponent)
+        if (HealthComponent)
         {
             HealthComponent.onDamageTaken += TookDamage;
             HealthComponent.onHitpointDepeleted += Dead;
@@ -28,6 +32,17 @@ public class Zombie : MonoBehaviour
     private void PerceptionUpdated(bool successfullySensed, PerceptionStimuli stimuli)
     {
         
+    }
+
+
+    public void Attack ()
+    {
+        animationControler.SetLayerWeight(UpperBodyLayerIndex, 1);
+    }
+
+    public void StopAttack()
+    {
+        animationControler.SetLayerWeight(UpperBodyLayerIndex, 0);
     }
 
     private void Dead()
@@ -45,7 +60,6 @@ public class Zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void OnHasDied()
@@ -56,5 +70,10 @@ public class Zombie : MonoBehaviour
     void DestroySelf()
     {
         Destroy(gameObject);
+    }
+
+    public void DamagePlayer()
+    {
+        player.TakeDamage(DmamagePerHit);
     }
 }
